@@ -2,417 +2,521 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#10091f" />
-  <title>AnkR — Choose Your Battlefield</title>
-  <meta name="description" content="AnkR — choose where to watch, join the community, and find the latest content." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#080511" />
+  <meta name="color-scheme" content="dark" />
 
-  <!--
-    ANKR LINK HUB — v1
-    Edit the CONFIG object near the bottom of this file.
-    No external framework required.
-  -->
+  <title>AnkR — Choose Your Battlefield</title>
+  <meta name="description" content="AnkR — World of Warcraft, PvP, stories, streams, community and holy shenanigans." />
+  <meta property="og:title" content="AnkR — Choose Your Battlefield" />
+  <meta property="og:description" content="WoW. PvP. Stories. Shenanigans. Choose your battlefield and enter AnkR’s world." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ankr.gg/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/ankr-sigil.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     :root{
-      --bg:#080510;
-      --bg2:#13091e;
-      --panel:rgba(21,13,34,.78);
-      --panel2:rgba(12,8,22,.90);
-      --gold:#f2c15c;
-      --cream:#fff0c6;
-      --purple:#8b5cf6;
-      --blue:#3dd9ff;
-      --pink:#ff4fb8;
-      --orange:#ff8a3d;
-      --text:#fffaf0;
-      --muted:#bdb3c9;
-      --line:rgba(242,193,92,.26);
-      --shadow:0 18px 60px rgba(0,0,0,.42);
-      --radius:22px;
+      --bg:#07050d;
+      --bg2:#10091a;
+      --panel:rgba(17,11,28,.80);
+      --panel2:rgba(25,15,41,.78);
+      --cream:#fff3cf;
+      --text:#fffaf3;
+      --muted:#bcb1c7;
+      --gold:#f4c86e;
+      --gold2:#ff9f4f;
+      --purple:#9568ff;
+      --pink:#ff4eae;
+      --blue:#42d6ff;
+      --line:rgba(244,200,110,.24);
+      --lineSoft:rgba(255,255,255,.075);
+      --shadow:0 30px 80px rgba(0,0,0,.44);
+      --radius:28px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      min-height:100vh;
       color:var(--text);
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:
-        radial-gradient(circle at 15% 10%, rgba(139,92,246,.18), transparent 28%),
-        radial-gradient(circle at 85% 15%, rgba(255,79,184,.11), transparent 24%),
-        radial-gradient(circle at 50% 80%, rgba(61,217,255,.08), transparent 30%),
-        linear-gradient(180deg,var(--bg2),var(--bg));
+        radial-gradient(circle at 18% -4%,rgba(149,104,255,.24),transparent 31%),
+        radial-gradient(circle at 88% 4%,rgba(255,78,174,.13),transparent 25%),
+        radial-gradient(circle at 56% 96%,rgba(66,214,255,.08),transparent 27%),
+        linear-gradient(180deg,#12091d 0%,var(--bg2) 36%,var(--bg) 100%);
+      min-height:100vh;
       overflow-x:hidden;
     }
 
-    body:before{
+    body::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
-      opacity:.18;
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size:34px 34px;
-      mask-image:linear-gradient(to bottom, black, transparent 82%);
+      z-index:-2;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.66) 54%,transparent 92%);
     }
 
-    .wrap{
-      width:min(680px, calc(100% - 28px));
-      margin:0 auto;
-      padding:34px 0 48px;
+    body::after{
+      content:"";
+      position:fixed;
+      left:50%;
+      top:-280px;
+      width:780px;
+      height:500px;
+      transform:translateX(-50%);
+      border:1px solid rgba(244,200,110,.10);
+      border-radius:50%;
+      box-shadow:0 0 150px rgba(244,200,110,.045) inset;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    a{color:inherit}
+    .shell{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:26px 0 52px}
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:16px;
+      padding:0 4px;
     }
 
     .brand{
-      text-align:center;
-      margin:6px 0 26px;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      text-decoration:none;
+      font-family:Cinzel,serif;
+      font-weight:900;
+      letter-spacing:.13em;
+      font-size:14px;
+      color:var(--cream);
+    }
+    .brand img{width:38px;height:38px;filter:drop-shadow(0 0 16px rgba(149,104,255,.2))}
+
+    .top-actions{display:flex;align-items:center;gap:9px}
+    .micro-link{
+      padding:9px 12px;
+      border:1px solid var(--lineSoft);
+      border-radius:999px;
+      text-decoration:none;
+      color:#c9bfd1;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:.18s ease;
+    }
+    .micro-link:hover{color:var(--cream);border-color:rgba(244,200,110,.30);background:rgba(255,255,255,.025)}
+
+    .live-pill{
+      display:none;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,78,126,.42);
+      background:rgba(255,78,126,.08);
+      color:#ffd9e5;
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .live-pill.show{display:flex}
+    .live-dot{width:8px;height:8px;border-radius:50%;background:#ff4f7c;box-shadow:0 0 15px #ff4f7c;animation:pulse 1.2s infinite}
+    @keyframes pulse{50%{transform:scale(.78);opacity:.42}}
+
+    .hero{
+      position:relative;
+      display:grid;
+      grid-template-columns:minmax(0,1.06fr) minmax(330px,.94fr);
+      min-height:570px;
+      align-items:stretch;
+      border:1px solid var(--line);
+      border-radius:34px;
+      background:
+        linear-gradient(135deg,rgba(149,104,255,.10),transparent 38%),
+        radial-gradient(circle at 78% 50%,rgba(255,78,174,.09),transparent 31%),
+        rgba(10,6,17,.79);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px);
     }
 
-    .crest{
-      width:78px;height:78px;
-      display:grid;
-      place-items:center;
-      margin:0 auto 12px;
-      border:1px solid rgba(242,193,92,.35);
+    .hero::before{
+      content:"";
+      position:absolute;
+      left:-100px;
+      bottom:-300px;
+      width:760px;
+      height:480px;
       border-radius:50%;
-      background:
-        radial-gradient(circle, rgba(242,193,92,.12), transparent 60%),
-        rgba(9,6,17,.6);
-      box-shadow:
-        0 0 0 7px rgba(242,193,92,.035),
-        0 0 34px rgba(139,92,246,.20);
-      font-family:Georgia,serif;
+      border:1px solid rgba(244,200,110,.10);
+      background:radial-gradient(circle,rgba(244,200,110,.05),transparent 60%);
+      transform:rotate(-7deg);
+    }
+
+    .hero-copy{
+      position:relative;
+      z-index:4;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:58px 28px 58px 56px;
+    }
+
+    .kicker{
+      margin:0 0 15px;
+      color:var(--gold);
+      font-size:10px;
       font-weight:900;
-      letter-spacing:-.06em;
-      font-size:31px;
-      color:var(--cream);
-      text-shadow:0 0 18px rgba(255,138,61,.35);
+      letter-spacing:.23em;
+      text-transform:uppercase;
     }
 
     h1{
       margin:0;
-      font-family:Georgia, "Times New Roman", serif;
-      font-size:clamp(38px, 9vw, 62px);
-      letter-spacing:.02em;
-      line-height:.95;
+      font-family:Cinzel,Georgia,serif;
       color:var(--cream);
-      text-shadow:
-        0 2px 0 #5d3215,
-        0 0 24px rgba(255,79,184,.19);
+      line-height:.88;
+      letter-spacing:-.035em;
+      font-size:clamp(62px,8.4vw,108px);
+      text-shadow:0 3px 0 rgba(89,45,21,.72),0 0 38px rgba(255,78,174,.10);
+    }
+
+    .hero-subtitle{
+      display:block;
+      margin-top:12px;
+      font-size:clamp(23px,3.3vw,39px);
+      line-height:1.02;
+      letter-spacing:.07em;
+      background:linear-gradient(90deg,#ffe7a4 0%,var(--gold) 45%,var(--gold2) 86%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
     }
 
     .tagline{
-      margin:10px auto 0;
-      color:var(--muted);
-      max-width:520px;
+      margin:19px 0 0;
+      font-family:Cinzel,serif;
+      color:#efe1bf;
       font-size:14px;
-      letter-spacing:.06em;
-      text-transform:uppercase;
+      font-weight:700;
+      letter-spacing:.07em;
     }
 
-    .status{
-      display:none;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      width:max-content;
-      margin:18px auto 0;
-      padding:7px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,79,184,.35);
-      background:rgba(255,79,184,.08);
-      color:#ffd8ee;
-      font-weight:800;
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .lead{
+      max-width:640px;
+      margin:13px 0 0;
+      color:#cfc4d7;
+      line-height:1.72;
+      font-size:14px;
     }
 
-    .status.show{display:flex}
-    .dot{
-      width:8px;height:8px;border-radius:50%;
-      background:#ff4f78;
-      box-shadow:0 0 14px #ff4f78;
-      animation:pulse 1.25s infinite;
-    }
-    @keyframes pulse{50%{opacity:.36;transform:scale(.88)}}
-
-    .panel{
-      position:relative;
-      padding:22px;
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(28,17,44,.82),rgba(10,7,18,.88));
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(14px);
-      margin-top:16px;
-      overflow:hidden;
-    }
-
-    .panel:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(110deg, transparent 20%, rgba(242,193,92,.035), transparent 72%);
-    }
-
-    .eyebrow{
-      position:relative;
-      margin:0 0 5px;
-      font-size:11px;
-      color:var(--gold);
-      font-weight:900;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-
-    h2{
-      position:relative;
-      margin:0 0 15px;
-      font-family:Georgia, "Times New Roman", serif;
-      color:var(--cream);
-      font-size:26px;
-      line-height:1.1;
-    }
-
-    .battlefield-grid{
-      display:grid;
-      gap:11px;
-    }
-
-    .btn{
-      position:relative;
-      display:flex;
-      align-items:center;
-      min-height:68px;
-      gap:14px;
-      padding:13px 15px;
-      border-radius:16px;
-      text-decoration:none;
-      color:var(--text);
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.045);
-      transition:.18s ease;
-      overflow:hidden;
-    }
-
-    .btn:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      opacity:0;
-      background:linear-gradient(90deg, rgba(255,255,255,.03), rgba(255,255,255,.08));
-      transition:.18s ease;
-    }
-
-    .btn:hover{
-      transform:translateY(-2px);
-      border-color:rgba(242,193,92,.38);
-      box-shadow:0 10px 28px rgba(0,0,0,.28);
-    }
-    .btn:hover:after{opacity:1}
-
-    .btn.primary{
-      min-height:76px;
-      border-color:rgba(242,193,92,.35);
-      background:
-        linear-gradient(90deg, rgba(139,92,246,.13), rgba(255,79,184,.08), rgba(255,138,61,.09)),
-        rgba(255,255,255,.04);
-    }
-
-    .ico{
-      position:relative;
-      z-index:1;
-      flex:0 0 auto;
-      width:42px;height:42px;
-      display:grid;
-      place-items:center;
-      border-radius:12px;
-      background:rgba(255,255,255,.075);
-      border:1px solid rgba(255,255,255,.08);
-      font-size:21px;
-    }
-
-    .btn-text{
-      position:relative;
-      z-index:1;
-      min-width:0;
-      flex:1;
-    }
-
-    .btn-title{
-      display:block;
-      font-weight:900;
-      letter-spacing:.025em;
-      font-size:15px;
-    }
-
-    .btn-sub{
-      display:block;
-      color:var(--muted);
-      margin-top:2px;
-      font-size:12px;
-    }
-
-    .arrow{
-      position:relative;
-      z-index:1;
-      color:var(--gold);
-      font-weight:900;
-      font-size:18px;
-    }
-
-    .small-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-
-    .small-btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:48px;
-      padding:10px;
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}
+    .cta{
+      min-width:154px;
+      padding:13px 16px;
       border-radius:14px;
-      border:1px solid rgba(255,255,255,.085);
-      background:rgba(255,255,255,.035);
-      color:var(--text);
+      border:1px solid rgba(244,200,110,.34);
+      background:linear-gradient(180deg,rgba(244,200,110,.11),rgba(244,200,110,.045));
+      color:var(--cream);
       text-decoration:none;
-      font-weight:800;
-      font-size:13px;
-      transition:.18s ease;
-    }
-    .small-btn:hover{
-      transform:translateY(-1px);
-      border-color:rgba(61,217,255,.30);
-      background:rgba(61,217,255,.045);
-    }
-
-    .socials{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:9px;
-      margin:18px auto 0;
-    }
-
-    .socials a{
-      color:var(--muted);
-      text-decoration:none;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-      padding:7px 9px;
-      border-radius:10px;
-    }
-    .socials a:hover{color:var(--cream);background:rgba(255,255,255,.04)}
-
-    .footer{
       text-align:center;
-      color:#7f748c;
-      margin-top:22px;
       font-size:11px;
-      letter-spacing:.04em;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease;
     }
+    .cta:hover{transform:translateY(-2px);border-color:rgba(244,200,110,.58);box-shadow:0 12px 26px rgba(0,0,0,.22),0 0 24px rgba(244,200,110,.07)}
+    .cta.primary{background:linear-gradient(90deg,#f3cc76,#ffaf58);color:#150d1c;border-color:transparent;box-shadow:0 10px 28px rgba(244,200,110,.13)}
+    .cta.secondary{border-color:rgba(149,104,255,.36);background:rgba(149,104,255,.08)}
+
+    .hero-art{
+      position:relative;
+      min-height:570px;
+      overflow:hidden;
+      isolation:isolate;
+      background:
+        linear-gradient(90deg,rgba(10,6,17,1) 0%,rgba(10,6,17,.58) 16%,transparent 42%),
+        linear-gradient(180deg,rgba(255,255,255,.03),transparent 26%),
+        #111020;
+    }
+    .hero-art::before{
+      content:"";
+      position:absolute;
+      inset:6% 8% 8% 7%;
+      border-radius:48% 48% 20% 20%;
+      border:1px solid rgba(244,200,110,.15);
+      box-shadow:0 0 90px rgba(149,104,255,.08) inset;
+      z-index:0;
+    }
+    .hero-art::after{
+      content:"";
+      position:absolute;
+      left:-1px;top:0;bottom:0;width:42%;
+      background:linear-gradient(90deg,#0b0712 0%,rgba(11,7,18,.86) 28%,transparent 100%);
+      z-index:3;
+      pointer-events:none;
+    }
+    .hero-art img.hero-img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:53% 43%;
+      filter:saturate(1.04) contrast(1.04);
+      z-index:1;
+    }
+    .art-glow{
+      position:absolute;
+      right:-130px;bottom:-160px;
+      width:520px;height:520px;border-radius:50%;
+      background:radial-gradient(circle,rgba(255,159,79,.19),rgba(255,78,174,.09) 34%,rgba(149,104,255,.06) 55%,transparent 72%);
+      filter:blur(8px);
+      z-index:2;
+      pointer-events:none;
+    }
+    .art-runes{
+      position:absolute;
+      right:24px;
+      top:24px;
+      z-index:4;
+      color:rgba(255,242,205,.72);
+      font-family:Cinzel,serif;
+      font-size:9px;
+      line-height:1.65;
+      letter-spacing:.24em;
+      text-align:right;
+      text-transform:uppercase;
+    }
+
+    .section-head{display:flex;align-items:end;gap:18px;margin:39px 2px 15px}
+    .section-head h2{margin:0;font-family:Cinzel,serif;color:var(--cream);font-size:clamp(27px,4vw,42px);line-height:1}
+    .section-head p{margin:7px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+    .section-rule{flex:1;height:1px;margin-bottom:8px;background:linear-gradient(90deg,rgba(244,200,110,.32),transparent)}
+
+    .battle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .battle-card{
+      --accent:#9568ff;
+      --glow:rgba(149,104,255,.24);
+      position:relative;
+      min-height:250px;
+      padding:23px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      border:1px solid var(--lineSoft);
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 95% 0%,var(--glow),transparent 41%),
+        linear-gradient(180deg,rgba(255,255,255,.042),rgba(255,255,255,.022));
+      text-decoration:none;
+      overflow:hidden;
+      box-shadow:0 16px 42px rgba(0,0,0,.22);
+      transition:.2s ease;
+    }
+    .battle-card:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--accent),transparent 45%);box-shadow:0 23px 55px rgba(0,0,0,.30),0 0 32px color-mix(in srgb,var(--accent),transparent 88%)}
+    .battle-card.kick{--accent:#75ff4f;--glow:rgba(117,255,79,.14)}
+    .battle-card.youtube{--accent:#ff6077;--glow:rgba(255,96,119,.20)}
+
+    .platform-top{display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;z-index:2}
+    .platform-mark{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);color:var(--accent)}
+    .platform-mark svg{width:25px;height:25px;fill:currentColor}
+    .arrow{font-size:20px;color:var(--gold);transition:transform .2s ease}
+    .battle-card:hover .arrow{transform:translateX(4px)}
+    .battle-content{position:relative;z-index:2}
+    .battle-card h3{margin:0 0 7px;font-family:Cinzel,serif;color:var(--cream);font-size:22px}
+    .battle-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.62}
+    .battle-cta{display:inline-block;margin-top:16px;color:var(--gold);font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+
+    .bastion{
+      display:grid;
+      grid-template-columns:1.12fr .88fr;
+      gap:0;
+      min-height:260px;
+      margin-top:14px;
+      border-radius:26px;
+      border:1px solid rgba(244,200,110,.20);
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 82% 48%,rgba(244,200,110,.09),transparent 25%),
+        linear-gradient(135deg,rgba(149,104,255,.08),transparent 46%),
+        var(--panel);
+      box-shadow:0 16px 44px rgba(0,0,0,.22);
+    }
+    .bastion-copy{padding:33px;display:flex;flex-direction:column;justify-content:center}
+    .eyebrow{margin:0 0 8px;color:var(--gold);font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+    .bastion h3,.status-card h3{margin:0;font-family:Cinzel,serif;color:var(--cream);font-size:clamp(26px,3vw,35px)}
+    .bastion p,.status-card p{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.68}
+    .bastion-actions{margin-top:20px;display:flex;gap:9px;flex-wrap:wrap}
+    .bastion-art{position:relative;display:grid;place-items:center;min-height:260px;background:linear-gradient(120deg,rgba(149,104,255,.03),rgba(255,78,174,.045))}
+    .bastion-art::before{content:"";position:absolute;width:235px;height:235px;border-radius:50%;background:radial-gradient(circle,rgba(244,200,110,.12),rgba(149,104,255,.06) 45%,transparent 70%)}
+    .bastion-art img{position:relative;width:150px;height:150px;filter:drop-shadow(0 0 35px rgba(244,200,110,.10));opacity:.96}
+
+    .status-card{
+      margin-top:14px;
+      padding:25px 28px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:18px;
+      border:1px solid var(--lineSoft);
+      border-radius:22px;
+      background:rgba(255,255,255,.026);
+    }
+    .status-orb{width:16px;height:16px;border-radius:50%;background:#7f738b;box-shadow:0 0 0 6px rgba(127,115,139,.08)}
+    .status-card.live .status-orb{background:#ff4f7c;box-shadow:0 0 0 6px rgba(255,79,124,.08),0 0 20px rgba(255,79,124,.54)}
+    .status-card h3{font-size:19px}
+    .status-card p{margin-top:4px}
+    .status-link{padding:11px 14px;border:1px solid rgba(244,200,110,.25);border-radius:12px;text-decoration:none;color:var(--gold);font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
+
+    .social-panel{margin-top:14px;padding:26px;border:1px solid var(--lineSoft);border-radius:22px;background:rgba(255,255,255,.022);text-align:center}
+    .social-panel h3{margin:0;font-family:Cinzel,serif;color:var(--cream);font-size:23px}
+    .social-panel p{margin:7px 0 0;color:var(--muted);font-size:12px}
+    .social-row{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:17px}
+    .social-link{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid transparent;text-decoration:none;color:#c2b7cb;font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;transition:.18s ease}
+    .social-link:hover{color:var(--cream);border-color:var(--lineSoft);background:rgba(255,255,255,.032);transform:translateY(-2px)}
+    .social-link svg{width:15px;height:15px;fill:currentColor}
+
+    footer{text-align:center;padding:25px 8px 0;color:#766d80;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+    footer strong{display:block;margin-bottom:7px;color:#9e92a9;font-family:Cinzel,serif;font-size:11px;letter-spacing:.11em}
 
     .hidden{display:none!important}
 
-    @media (max-width:520px){
-      .wrap{width:min(100% - 20px, 680px);padding-top:24px}
-      .panel{padding:17px}
-      .small-grid{grid-template-columns:1fr}
-      .btn{min-height:64px}
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;min-height:auto}
+      .hero-copy{padding:44px 38px 26px}
+      .hero-art{min-height:430px}
+      .hero-art::after{left:0;right:0;top:0;bottom:auto;width:auto;height:28%;background:linear-gradient(180deg,#0b0712 0%,rgba(11,7,18,.8) 34%,transparent 100%)}
+      .hero-art img.hero-img{object-position:53% 39%}
+      .battle-grid{grid-template-columns:1fr}
+      .battle-card{min-height:185px}
+      .bastion{grid-template-columns:1fr}
+      .bastion-art{min-height:190px}
     }
+
+    @media (max-width:600px){
+      .shell{width:min(100% - 18px,1180px);padding-top:15px}
+      .topbar{margin-bottom:10px}.micro-link{display:none}.brand{font-size:12px}.brand img{width:34px;height:34px}
+      .hero{border-radius:25px}
+      .hero-copy{padding:31px 22px 20px}
+      h1{font-size:60px}.hero-subtitle{font-size:25px}
+      .lead{font-size:13px}
+      .cta-row{display:grid;grid-template-columns:1fr 1fr;width:100%}.cta{min-width:0}
+      .hero-art{min-height:390px}
+      .section-head{margin-top:29px}.section-head p{max-width:240px}.section-rule{display:none}
+      .bastion-copy{padding:26px 22px}
+      .status-card{grid-template-columns:auto 1fr;padding:21px}.status-link{grid-column:1/-1;text-align:center}
+      .social-panel{padding:22px 14px}
+    }
+
+    @media (max-width:390px){.cta-row{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <header class="brand">
-      <div class="crest" aria-label="AnkR monogram">AR</div>
-      <h1>AnkR</h1>
-      <p class="tagline">World of Warcraft • Gaming • Stories • Shenanigans</p>
-      <div id="liveStatus" class="status"><span class="dot"></span> AnkR is live</div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="https://ankr.gg/" aria-label="ANKR.GG home"><img src="assets/ankr-sigil.svg" alt="" />ANKR.GG</a>
+      <div class="top-actions">
+        <a id="topBastion" class="micro-link" href="#bastion">AnkR’s Bastion</a>
+        <div id="livePill" class="live-pill"><span class="live-dot"></span> AnkR is live</div>
+      </div>
     </header>
 
-    <section class="panel">
-      <p class="eyebrow">Live streams</p>
-      <h2 id="battleTitle">Choose Your Battlefield</h2>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="kicker">World of Warcraft • PvP • Stories • Community</p>
+        <h1 id="hero-title">ANKR<span class="hero-subtitle">Choose Your Battlefield</span></h1>
+        <p class="tagline">WoW. PvP. Stories. Shenanigans.</p>
+        <p class="lead">Pick your arena and step into the world of World of Warcraft, competitive chaos, epic moments and holy nonsense.</p>
+        <div class="cta-row">
+          <a id="heroTwitch" class="cta primary" href="#" target="_blank" rel="noopener">Watch on Twitch</a>
+          <a id="heroKick" class="cta" href="#" target="_blank" rel="noopener">Join on Kick</a>
+          <a id="heroYouTube" class="cta" href="#" target="_blank" rel="noopener">Subscribe on YouTube</a>
+          <a id="heroDiscord" class="cta secondary" href="#" target="_blank" rel="noopener">Enter the Bastion</a>
+        </div>
+      </div>
 
-      <div class="battlefield-grid">
-        <a id="twitchBtn" class="btn primary" href="#" target="_blank" rel="noopener">
-          <span class="ico">🟣</span>
-          <span class="btn-text">
-            <span class="btn-title">TWITCH</span>
-            <span class="btn-sub">Watch the live stream</span>
-          </span>
-          <span class="arrow">›</span>
-        </a>
-
-        <a id="kickBtn" class="btn primary" href="#" target="_blank" rel="noopener">
-          <span class="ico">🟢</span>
-          <span class="btn-text">
-            <span class="btn-title">KICK</span>
-            <span class="btn-sub">Watch the live stream</span>
-          </span>
-          <span class="arrow">›</span>
-        </a>
-
-        <a id="youtubeBtn" class="btn primary" href="#" target="_blank" rel="noopener">
-          <span class="ico">🔴</span>
-          <span class="btn-text">
-            <span class="btn-title">YOUTUBE</span>
-            <span class="btn-sub">Live streams, videos & shorts</span>
-          </span>
-          <span class="arrow">›</span>
-        </a>
+      <div class="hero-art" aria-label="The AnkR hero — bald, mustached paladin in a backwards cap, dark armor and neon-gold raven cloak">
+        <img class="hero-img" src="assets/ankr-hero-web.jpg" alt="AnkR hero in dark paladin armor with a backwards cap, mustache, raven-feather cloak and glowing warhammer" />
+        <div class="art-glow"></div>
+        <div class="art-runes">Faith<br>Strength<br>Discipline<br>A Brighter Tomorrow</div>
       </div>
     </section>
 
-    <section class="panel">
-      <p class="eyebrow">The fellowship</p>
-      <h2>Join The Community</h2>
+    <div class="section-head">
+      <div><h2>Choose Your Battlefield</h2><p>However you prefer to watch, the crusade continues there.</p></div>
+      <div class="section-rule"></div>
+    </div>
 
-      <a id="discordBtn" class="btn" href="#" target="_blank" rel="noopener">
-        <span class="ico">🛡️</span>
-        <span class="btn-text">
-          <span class="btn-title">DISCORD</span>
-          <span class="btn-sub">Join AnkR between streams</span>
-        </span>
-        <span class="arrow">›</span>
+    <section class="battle-grid" aria-label="Primary platforms">
+      <a id="twitchBtn" class="battle-card twitch" href="#" target="_blank" rel="noopener">
+        <div class="platform-top"><span class="platform-mark"><svg viewBox="0 0 24 24"><path d="M4 2h17v11.7l-4.7 4.7h-3.7L10 21H7v-2.6H3V5zm2 2v12h3v2.1l2.1-2.1h4.4l3.5-3.5V4zm4 3h2v5h-2zm5 0h2v5h-2z"/></svg></span><span class="arrow">→</span></div>
+        <div class="battle-content"><h3>Twitch</h3><p>Live streams, PvP moments, reactions, community chaos and the full real-time AnkR experience.</p><span class="battle-cta">Enter Twitch</span></div>
+      </a>
+
+      <a id="kickBtn" class="battle-card kick" href="#" target="_blank" rel="noopener">
+        <div class="platform-top"><span class="platform-mark"><svg viewBox="0 0 24 24"><path d="M4 4h5v6l5-6h6l-7 8 7 8h-6l-5-6v6H4z"/></svg></span><span class="arrow">→</span></div>
+        <div class="battle-content"><h3>Kick</h3><p>Another frontline for live content, community presence and room for the AnkR crusade to grow.</p><span class="battle-cta">Enter Kick</span></div>
+      </a>
+
+      <a id="youtubeBtn" class="battle-card youtube" href="#" target="_blank" rel="noopener">
+        <div class="platform-top"><span class="platform-mark"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5a3 3 0 0 0-2.1 2.1A31 31 0 0 0 2 12a31 31 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22 12a31 31 0 0 0-.4-4.8ZM10 15.2V8.8l5.5 3.2z"/></svg></span><span class="arrow">→</span></div>
+        <div class="battle-content"><h3>YouTube</h3><p>Videos, Shorts, highlights, stories and deeper AnkR content — all in one growing archive.</p><span class="battle-cta">Enter YouTube</span></div>
       </a>
     </section>
 
-    <section class="panel">
-      <p class="eyebrow">Keep your bearings</p>
-      <h2>What’s Next?</h2>
-      <div class="small-grid">
-        <a id="scheduleBtn" class="small-btn" href="#" target="_blank" rel="noopener">📅 Stream Schedule</a>
-        <a id="latestBtn" class="small-btn" href="#" target="_blank" rel="noopener">🎬 Latest Video</a>
+    <section id="bastion" class="bastion">
+      <div class="bastion-copy">
+        <p class="eyebrow">The Community Stronghold</p>
+        <h3>AnkR’s Bastion</h3>
+        <p>The stronghold of the community. Join the Bastion for updates, discussion, clips, announcements, WoW, banter and people who can disagree without setting the tavern on fire.</p>
+        <div class="bastion-actions"><a id="discordBtn" class="cta primary" href="#" target="_blank" rel="noopener">Join the Bastion</a></div>
       </div>
+      <div class="bastion-art" aria-hidden="true"><img src="assets/ankr-sigil.svg" alt="" /></div>
     </section>
 
-    <nav class="socials" aria-label="Social links">
-      <a id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a>
-      <a id="tiktokLink" href="#" target="_blank" rel="noopener">TikTok</a>
-      <a id="xLink" href="#" target="_blank" rel="noopener">X</a>
-      <a id="youtubeSocialLink" href="#" target="_blank" rel="noopener">YouTube</a>
-    </nav>
+    <section id="statusCard" class="status-card" aria-live="polite">
+      <div class="status-orb"></div>
+      <div><p class="eyebrow">Current Status</p><h3 id="statusTitle">The battlefield is quiet — for now.</h3><p id="statusCopy">Catch up on the latest AnkR content or choose a platform above. The crusade continues soon.</p></div>
+      <a id="statusBtn" class="status-link" href="https://www.twitch.tv/ankrtv" target="_blank" rel="noopener">See Twitch</a>
+    </section>
 
-    <p class="footer">⚔️ Choose your battlefield. Hold the line. ⚔️</p>
+    <section class="social-panel">
+      <h3>Elsewhere in the Realm</h3>
+      <p>Clips, updates, thoughts and extra chaos across the AnkR network.</p>
+      <nav class="social-row" aria-label="Social links">
+        <a id="instagramLink" class="social-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.1a2.9 2.9 0 1 0 0 5.8 2.9 2.9 0 0 0 0-5.8ZM17.6 5.7a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/></svg>Instagram</a>
+        <a id="tiktokLink" class="social-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3h3c.2 1.5 1.2 2.8 2.6 3.4A6 6 0 0 0 22 7v3a9 9 0 0 1-5-1.5V15a6 6 0 1 1-6-6v3a3 3 0 1 0 3 3z"/></svg>TikTok</a>
+        <a id="xLink" class="social-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 3h4.8l4.4 5.9L18.3 3H21l-6.5 7.5L21.5 21h-4.8l-4.8-6.4L6.3 21H3.6l7-8.1z"/></svg>X</a>
+        <a id="youtubeSocialLink" class="social-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5a3 3 0 0 0-2.1 2.1A31 31 0 0 0 2 12a31 31 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22 12a31 31 0 0 0-.4-4.8ZM10 15.2V8.8l5.5 3.2z"/></svg>YouTube</a>
+      </nav>
+    </section>
+
+    <footer><strong>Faith. Strength. Discipline. A brighter tomorrow.</strong>AnkR Forever.</footer>
   </main>
 
   <script>
-    /*
-      =========================
-      EDIT ONLY THIS CONFIG
-      =========================
-    */
+    /* =========================
+       ANKR.GG QUICK CONFIG
+       ========================= */
     const CONFIG = {
       liveMode: false,
 
@@ -421,61 +525,69 @@
       youtube: "https://www.youtube.com/@Ankrmediatv",
       discord: "YOUR_DISCORD_INVITE_URL",
 
-      schedule: "YOUR_SCHEDULE_URL",
-      latestVideo: "YOUR_LATEST_VIDEO_URL",
-
       instagram: "https://instagram.com/ankr.tv",
       tiktok: "https://tiktok.com/Ankr.tv",
       x: "https://x.com/ankrtv"
     };
 
-    const map = {
-      twitchBtn: CONFIG.twitch,
-      kickBtn: CONFIG.kick,
-      youtubeBtn: CONFIG.youtube,
-      discordBtn: CONFIG.discord,
-      scheduleBtn: CONFIG.schedule,
-      latestBtn: CONFIG.latestVideo,
-      instagramLink: CONFIG.instagram,
-      tiktokLink: CONFIG.tiktok,
-      xLink: CONFIG.x,
-      youtubeSocialLink: CONFIG.youtube
+    const source = new URLSearchParams(window.location.search).get("src") || "direct";
+    const placeholder = url => !url || url === "#" || url.startsWith("YOUR_");
+
+    function tracked(url,destination){
+      if(placeholder(url)) return "#";
+      try{
+        const u = new URL(url);
+        u.searchParams.set("utm_source",source);
+        u.searchParams.set("utm_medium","bio");
+        u.searchParams.set("utm_campaign","choose_your_battlefield");
+        u.searchParams.set("utm_content",destination);
+        return u.toString();
+      }catch{return url;}
+    }
+
+    const linkMap = {
+      heroTwitch:CONFIG.twitch,
+      heroKick:CONFIG.kick,
+      heroYouTube:CONFIG.youtube,
+      heroDiscord:CONFIG.discord,
+      twitchBtn:CONFIG.twitch,
+      kickBtn:CONFIG.kick,
+      youtubeBtn:CONFIG.youtube,
+      discordBtn:CONFIG.discord,
+      instagramLink:CONFIG.instagram,
+      tiktokLink:CONFIG.tiktok,
+      xLink:CONFIG.x,
+      youtubeSocialLink:CONFIG.youtube
     };
 
-    const src = new URLSearchParams(window.location.search).get("src") || "direct";
-
-    function isPlaceholder(url){
-      return !url || url.startsWith("YOUR_") || url === "#";
-    }
-
-    function tracked(url, destination){
-      if (isPlaceholder(url)) return "#";
-      try {
-        const u = new URL(url);
-        u.searchParams.set("utm_source", src);
-        u.searchParams.set("utm_medium", "bio");
-        u.searchParams.set("utm_campaign", "choose_your_battlefield");
-        u.searchParams.set("utm_content", destination);
-        return u.toString();
-      } catch {
-        return url;
-      }
-    }
-
-    Object.entries(map).forEach(([id, url]) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      if (isPlaceholder(url)) {
-        el.classList.add("hidden");
-      } else {
-        el.href = tracked(url, id);
-      }
+    Object.entries(linkMap).forEach(([id,url])=>{
+      const el=document.getElementById(id);
+      if(!el) return;
+      if(placeholder(url)) el.classList.add("hidden");
+      else el.href=tracked(url,id);
     });
 
-    if (CONFIG.liveMode) {
-      document.getElementById("liveStatus").classList.add("show");
-      document.getElementById("battleTitle").textContent = "Choose Your Battlefield";
+    if(placeholder(CONFIG.discord)){
+      document.getElementById("bastion")?.classList.add("hidden");
+      document.getElementById("topBastion")?.classList.add("hidden");
+    }else{
+      document.getElementById("topBastion").href=tracked(CONFIG.discord,"topBastion");
+    }
+
+    const statusCard=document.getElementById("statusCard");
+    const statusTitle=document.getElementById("statusTitle");
+    const statusCopy=document.getElementById("statusCopy");
+    const statusBtn=document.getElementById("statusBtn");
+
+    if(CONFIG.liveMode){
+      document.getElementById("livePill")?.classList.add("show");
+      statusCard?.classList.add("live");
+      statusTitle.textContent="ANKR IS LIVE right now.";
+      statusCopy.textContent="Step into the action. The battlefield is open and the Bastion is mobilizing.";
+      statusBtn.textContent="Watch Live";
+      statusBtn.href=tracked(CONFIG.twitch,"status_live");
+    }else{
+      statusBtn.href=tracked(CONFIG.twitch,"status_offline");
     }
   </script>
 </body>
